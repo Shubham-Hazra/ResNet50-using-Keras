@@ -14,6 +14,7 @@ from sklearn.preprocessing import MultiLabelBinarizer
 from tensorflow import keras
 
 
+# Define an identity block
 def identity_block(X, filters, f, initializer=glorot_uniform):
     f1, f2, f3 = filters
     X_short = X
@@ -39,6 +40,8 @@ def identity_block(X, filters, f, initializer=glorot_uniform):
     X = add_layer([X, X_short])
     X = relu(X)
     return X
+
+# Define a convolutional block
 
 
 def conv_block(X, filters, f, s=2, initializer=glorot_uniform):
@@ -71,6 +74,8 @@ def conv_block(X, filters, f, s=2, initializer=glorot_uniform):
     X = add_layer([X, X_short])
     X = relu(X)
     return X
+
+# Define the ResNet50 model
 
 
 def ResNet50(input_shape=(64, 64, 3), classes=6, initializer=glorot_uniform):
@@ -105,8 +110,10 @@ def ResNet50(input_shape=(64, 64, 3), classes=6, initializer=glorot_uniform):
     return model
 
 
+# Create the ResNet50 model
 model = ResNet50(input_shape=(64, 64, 3), classes=6)
 
+# Compile the model
 model.compile(optimizer='adam', loss='categorical_crossentropy',
               metrics=['accuracy'])
 
@@ -147,7 +154,7 @@ preds = model.evaluate(x_train, y_train)
 print("Loss = " + str(preds[0]))
 print("Test Accuracy = " + str(preds[1]))
 
-
+# Predict the model
 img_path = 'img.jpg'
 img = image.load_img(img_path, target_size=(64, 64))
 x = image.img_to_array(img)
