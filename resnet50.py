@@ -156,6 +156,4 @@ x = x/255.0
 print('Input image shape:', x.shape)
 plt.imshow(img)
 prediction = model.predict(x)
-print(
-    "Class prediction vector [p(0), p(1), p(2), p(3), p(4), p(5)] = ", prediction)
-print("Class:", np.argmax(prediction))
+print("Predicted digit:", np.argmax(prediction))
